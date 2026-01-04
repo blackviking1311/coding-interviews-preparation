@@ -52,6 +52,37 @@ public class LinkedList {
         this.tail = newNode;
     }
 
+    public ListNode sortList(ListNode head) {
+        ListNode zeroHead = getNewNode(-1), oneHead = getNewNode(-1), twoHead = getNewNode(-1);
+        ListNode zeroTail = zeroHead, oneTail = oneHead, twoTail = twoHead;
+
+        ListNode ptr = head;
+        while (ptr != null) {
+            if (ptr.data == 0) {
+                zeroTail.next = ptr;
+                zeroTail = ptr;
+            } else if (ptr.data == 1) {
+                oneTail.next = ptr;
+                oneTail = ptr;
+            } else {
+                twoTail.next = ptr;
+                twoTail = ptr;
+            }
+
+            ptr = ptr.next;
+        }
+
+        zeroTail.next = (oneHead.next != null) ? oneHead.next : twoHead.next;
+        oneTail.next = twoHead.next;
+        twoTail.next = null;
+
+        return zeroHead.next;
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        return null;
+    }
+
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
         for (int i = 1 ; i <= 10 ; i++) {
